@@ -38,57 +38,59 @@ public class MethodsExercises {
 //
 //    }
 
-//    public static void factorials(int num){
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Give me a number between 1-10");
-//        num = scanner.nextInt();
-//        int i = 1;
-//        long fact = 1;
-//
-//        for(i = 1; i <= num; i++){
-//            fact = fact * i;
-//        }
-//        System.out.println(num + "! is: " + fact);
-//    }
-
-
-
-
-    public static void diceRoll(){
-        System.out.println("How many sides do you want?");
+    public static void factorials(int num){
         Scanner scanner = new Scanner(System.in);
-        int userNumber = scanner.nextInt();
+        System.out.println("Give me a number between 1-10");
+        num = scanner.nextInt();
+        int i = 1;
+        long fact = 1;
 
-        for (int i = 1; i <= 4; i++) {
-            String yes = "y";
-            String no = "n";
-            System.out.println("Roll again? (y/n)");
-            Scanner sc = new Scanner(System.in);
-            String userReply = scanner.next();
-
-            if (userReply.equals(yes)) {
-                int dice1;
-                int dice2;
-                int roll;
-
-                dice1 = (int) (Math.random()* userNumber + 1);
-                dice2 = (int) (Math.random()* userNumber + 1);
-                roll = dice1 + dice2;
-
-                System.out.println("First die" + dice1);
-                System.out.println("2nd die" + dice2);
-                System.out.println("Total roll" + roll);
-
-
-                System.out.println("Continue (y/n)");
-                String choice = scanner.next();
-                if (choice.equals(yes)) {
-                    continue;
-                }else {
-                    break;
-                }
-            }
+        for(i = 1; i <= num; i++){
+            fact = fact * i;
         }
+        System.out.println(num + "! is: " + fact);
+    }
+
+
+
+
+
+
+//    public static void diceRoll(){
+//        System.out.println("How many sides do you want?");
+//        Scanner scanner = new Scanner(System.in);
+//        int userNumber = scanner.nextInt();
+//
+//        for (int i = 1; i <= 4; i++) {
+//            String yes = "y";
+//            String no = "n";
+//            System.out.println("Roll again? (y/n)");
+//            Scanner sc = new Scanner(System.in);
+//            String userReply = scanner.next();
+//
+//            if (userReply.equals(yes)) {
+//                int dice1;
+//                int dice2;
+//                int roll;
+//
+//                dice1 = (int) (Math.random()* userNumber + 1);
+//                dice2 = (int) (Math.random()* userNumber + 1);
+//                roll = dice1 + dice2;
+//
+//                System.out.println("First die" + dice1);
+//                System.out.println("2nd die" + dice2);
+//                System.out.println("Total roll" + roll);
+//
+//
+//                System.out.println("Continue (y/n)");
+//                String choice = scanner.next();
+//                if (choice.equals(yes)) {
+//                    continue;
+//                }else {
+//                    break;
+//                }
+//            }
+//        }
 
 
 //        System.out.println("Would you like to roll?");
@@ -105,7 +107,7 @@ public class MethodsExercises {
 
 
 
-    }
+//    }
 
 
 
@@ -117,9 +119,9 @@ public class MethodsExercises {
 //        System.out.println(modulus(9, 2));
 //        getInteger(1,10);
 //        System.out.println(factorials());
-//        factorials();
+        factorials(0);
 //        System.out.println(diceRoll());
-        diceRoll();
+//        diceRoll();
     }
 
 
