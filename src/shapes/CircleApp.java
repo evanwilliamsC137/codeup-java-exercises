@@ -5,21 +5,14 @@ import java.util.Scanner;
 import util.Input;
 
 public class CircleApp {
+    public static void main(String[] args) {
+        System.out.println("What is the radius?");
+        Input in = new Input();
 
-    static Scanner sc = new Scanner(System.in);
+        Circle circle2 = new Circle(in.getDouble());
 
-    public static void main(String args[]) {
-        System.out.print("Enter the radius: ");
+        System.out.println("The circumference is: " + circle2.getCircumference());
+        System.out.println("The area is: " + circle2.getArea());
 
-        double radius = sc.nextDouble();
-
-        double area = Math.PI * (radius * radius);
-        System.out.println("The area of this circle is: " + area);
-
-        double circumference= Math.PI * 2 * radius;
-        System.out.println( "The circumference of this circle is: " + circumference) ;
     }
-
-
-
 }

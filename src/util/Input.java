@@ -11,20 +11,24 @@ public class Input {
     }
 
     public String getString() {
-        System.out.println("Give me a string");
+//        System.out.println("Give me a string");
+//        String newString = scanner.nextLine();
+//        System.out.println(newString);
+//        return newString;
 
-        String newString = scanner.nextLine();
-        System.out.println(newString);
-
-        return newString;
+        return this.scanner.nextLine();
     }
 
     public boolean yesNo() {
+
+//        String userInput = this.scanner.nextLine();
+//        return userInput.trim().equalsIgnoreCase("y") || userInput.trim().equalsIgnoreCase("yes");
+
         System.out.println("Give me a yes or no");
-        String yesNoAnswer = scanner.nextLine();
+        String yesNoAnswer = this.scanner.nextLine();
         boolean result = false;
 
-        if (yesNoAnswer.equalsIgnoreCase("yes")) {
+        if (yesNoAnswer.equalsIgnoreCase("yes") || yesNoAnswer.equalsIgnoreCase("y")) {
             System.out.println("You answered yes!");
             result = true;
         }else {
@@ -34,22 +38,26 @@ public class Input {
         return result;
     }
 
+    public int getInt(){return this.scanner.nextInt();}
+
     public int getInt(int min, int max) {
         System.out.println("Give me a number between" + min + " and " + max);
         int userInt = scanner.nextInt();
 
-        if (userInt > min && userInt < max) {
+        if (userInt >= min && userInt <= max) {
             System.out.println("Congrats!" + userInt + " is within " + min + " and " + max);
+            return userInt;
         }else {
             System.out.println("Sorry that number was out of range. Try again");
-            getInt(min, max);
+            return getInt(min, max);
         }
-        return userInt;
     }
 
 
+    public double getDouble(){return this.scanner.nextDouble();}
+
     public double getDouble( double min, double max) {
-        System.out.println("Give me a number between" + min + " and " + max);
+        System.out.println("Give me a decimal number between" + min + " and " + max);
         double userInt = scanner.nextDouble();
 
         if (userInt > min && userInt < max) {
