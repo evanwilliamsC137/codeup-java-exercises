@@ -3,16 +3,14 @@
 class Person {
     private String name;
 
-
-    public String getName(){
-//TODO: return the person's name
-        return this.name;
+    public String getName() {
+        return name;
     }
 
-    public void setName(String name){
-//TODO: change the name property to the passed value
+    public void setName(String name) {
         this.name = name;
     }
+
     public void sayHello(){
 //TODO: print a message to the console using the person's name
         System.out.println("Hello from " + this.name);
@@ -27,6 +25,7 @@ class Person {
 
         testPerson.sayHello();
         testPerson.getName();
+        System.out.println(testPerson.name);
         testPerson.setName("Dave");
 
         System.out.println(testPerson.name);
