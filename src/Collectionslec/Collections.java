@@ -78,6 +78,7 @@ public class Collections {
         System.out.println("////////////////");
 
         HashMap<Character, Square> squares = new HashMap<>();
+
         squares.put('A', new Square(5));
         squares.put('B', new Square(10));
         Square sq = new Square(3);
