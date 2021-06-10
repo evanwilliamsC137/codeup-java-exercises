@@ -5,34 +5,44 @@ public class ExceptionsStudy {
     public String definitelyNotAnInteger = "Nope, Im not an integer. im a string";
 
 
-    public void askForAnInteger() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter an integer");
-        String userInput = scanner.nextLine();
-        try {
-            int userInputInteger = Integer.parseInt(userInput);
-            System.out.println("The integer in your string is: " + userInputInteger);
-        }catch (NumberFormatException nfe) {
-            System.out.println(nfe.getMessage() + " There is no integer");
-        }finally {
-            System.out.println("Thank you for using this complex and useful application.");
-            System.out.println("Please come back and visit us.");
-        }
-    }
+//    public void askForAnInteger() {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Please enter an integer");
+//        String userInput = scanner.nextLine();
+//        try {
+//            int userInputInteger = Integer.parseInt(userInput);
+//            System.out.println("The integer in your string is: " + userInputInteger);
+//        }catch (NumberFormatException nfe) {
+//            System.out.println(nfe.getMessage() + " There is no integer");
+//        }finally {
+//            System.out.println("Thank you for using this complex and useful application.");
+//            System.out.println("Please come back and visit us.");
+//        }
+//    }
 
-    public void aMoreComplexAskForInteger() {
+//    public void aMoreComplexAskForInteger() {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Please give me an integer");
+//        String userInput = scanner.nextLine();
+//        try {
+//            int userInputInteger = Integer.parseInt(userInput, 10, 15, 10);
+//            System.out.println("thank you for entering: " + userInputInteger);
+//        }catch (NumberFormatException nfe) {
+//            System.out.println(" no integer between 10 and 15");
+//        }catch (IndexOutOfBoundsException iobe) {
+//            System.out.println("Your string wastn long enough");
+//        }finally {
+//            System.out.println("Thank you for visiting our app");
+//        }
+//    }
+
+    public void echoWord() throws  IllegalArgumentException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please give me an integer");
+        System.out.println("I am a parrot, please say something");
         String userInput = scanner.nextLine();
-        try {
-            int userInputInteger = Integer.parseInt(userInput, 10, 15, 10);
-            System.out.println("thank you for entering: " + userInputInteger);
-        }catch (NumberFormatException nfe) {
-            System.out.println(" no integer between 10 and 15");
-        }catch (IndexOutOfBoundsException iobe) {
-            System.out.println("Your string wastn long enough");
-        }finally {
-            System.out.println("Thank you for visiting our app");
+        if (userInput.equals("curses")) {
+            throw new  IllegalArgumentException();
         }
+        System.out.println(userInput);
     }
 }
