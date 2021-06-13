@@ -1,11 +1,10 @@
 package util;
 
 import java.util.Scanner;
-import java.util.function.IntBinaryOperator;
 
 public class Input {
-
     private Scanner scanner;
+//            = new Scanner(System.in);
 
     public Input() {
         this.scanner = new Scanner(System.in);
@@ -15,101 +14,98 @@ public class Input {
         return this.scanner.nextLine();
     }
 
+    // TODO: **BONUS**
+    public String getString(String prompt) {
+        System.out.println(prompt);
+        return this.scanner.nextLine();
+    }
+
     public boolean yesNo() {
-
-        System.out.println("Give me a yes or no");
-        String yesNoAnswer = this.scanner.nextLine();
-        boolean result = false;
-
-        if (yesNoAnswer.equalsIgnoreCase("yes") || yesNoAnswer.equalsIgnoreCase("y")) {
-            System.out.println("You answered yes!");
-            result = true;
-        }else {
-            System.out.println("You answered no!");
-            result = false;
-        }
-        return result;
+        String userInput = this.scanner.nextLine();
+        return userInput.trim().equalsIgnoreCase("y") || userInput.trim().equalsIgnoreCase("yes");
     }
 
-//    public int getInt(){return this.scanner.nextInt();}
+    // TODO: **BONUS**
+    public boolean yesNo(String prompt) {
+        System.out.println(prompt);
+        String userInput = this.scanner.next();
+        return userInput.trim().equalsIgnoreCase("y") || userInput.trim().equalsIgnoreCase("yes");
+    }
 
-//    public int getInt(int min, int max) {
-//        System.out.println("Give me a number between" + min + " and " + max);
-//        int userInt = scanner.nextInt();
-//
-//        if (userInt >= min && userInt <= max) {
-//            System.out.println("Congrats!" + userInt + " is within " + min + " and " + max);
-//            return userInt;
-//        }else {
-//            System.out.println("Sorry that number was out of range. Try again");
-//            return getInt(min, max);
-//        }
-//    }
+    public int getInt() {
+        return this.scanner.nextInt();
+    }
 
+    // TODO: **BONUS**
+    public int getInt(String prompt) {
+        System.out.println(prompt);
+        return this.scanner.nextInt();
+    }
 
-    @SuppressWarnings("all")
+    public int getInt(int min, int max) {
+        System.out.printf("Give me a whole number between %d and %d", min, max);
+        int userNumber = this.scanner.nextInt();
 
-    public int getInt(){
-        System.out.print("Enter a number: ");
-        try{
-            String userInput = getString();
-            System.out.println(userInput);
-            return Integer.valueOf(getString());
-        }catch(NumberFormatException nfe){
-            System.out.println("That's not a number!");
-            return getInt();
+        if(userNumber >= min && userNumber <= max) {
+            return userNumber;
+        } else {
+            System.out.println("That number is invalid.");
+            return getInt(min, max);
         }
     }
 
+    // TODO: **BONUS**
+    public int getInt(String prompt, int min, int max) {
+        System.out.println(prompt);
+        int userNumber = this.scanner.nextInt();
 
-
-//    public double getDouble(){return this.scanner.nextDouble();}
-//
-//    public double getDouble( double min, double max) {
-//        System.out.println("Give me a decimal number between" + min + " and " + max);
-//        double userInt = scanner.nextDouble();
-//
-//        if (userInt > min && userInt < max) {
-//            System.out.println("Congrats!" + userInt + " is within " + min + " and " + max);
-//        }else {
-//            System.out.println("Sorry that number was out of range. Try again");
-//            getDouble(min, max);
-//        }
-//        return userInt;
-//    }
-
-//    public double getDouble(){
-//        String userInput = getString();
-//        try{
-//            Double.valueOf(userInput);
-//        }catch(NumberFormatException nfe){
-//            System.out.println("That's not a double!");
-//            getDouble();
-//        }
-//        return Double.parseDouble(userInput);
-//    }
-
-    public double getDouble(){
-        System.out.print("Enter a number: ");
-        try{
-            String userInput = getString();
-            System.out.println(userInput);
-            return Double.valueOf(getString());
-        }catch(NumberFormatException nfe){
-            System.out.println("That's not a number!");
-            return getDouble();
+        if(userNumber >= min && userNumber <= max) {
+            return userNumber;
+        } else {
+            System.out.println("That number is invalid.");
+            return getInt(min, max);
         }
     }
 
-//    public int getBinary(){
-//        String userInput = getString();
-//        try{
-//            .valueOf(userInput);
-//        }catch(NumberFormatException nfe){
-//            System.out.println("That's not a double!");
-//            getDouble();
-//        }
-//        return Double.parseDouble(userInput);
-//    }
+
+    public double getDouble() {
+        return this.scanner.nextDouble();
+    }
+
+    // TODO: **BONUS**
+    public double getDouble(String prompt) {
+        System.out.println(prompt);
+        return this.scanner.nextDouble();
+    }
+
+    public double getDouble(double min, double max) {
+        System.out.printf("Give me a decimal number between %f and %f", min, max);
+        double userNumber = this.scanner.nextDouble();
+
+        if(userNumber >= min && userNumber <= max) {
+            return userNumber;
+        } else {
+            System.out.println("That number is invalid.");
+            return getDouble(min, max);
+        }
+    }
+
+    // TODO: **BONUS**
+    public double getDouble(String prompt, double min, double max) {
+        System.out.println(prompt);
+        double userNumber = this.scanner.nextDouble();
+
+        if(userNumber >= min && userNumber <= max) {
+            return userNumber;
+        } else {
+            System.out.println("That number is invalid.");
+            return getDouble(min, max);
+        }
+    }
+
+
+
+
+
 
 }

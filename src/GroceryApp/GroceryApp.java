@@ -1,124 +1,110 @@
-
 package GroceryApp;
 
 import util.Input;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-        public class GroceryApp {
-
-            public static Input input = new Input();
-
-            public static HashMap<String, ArrayList<GroItem>> catList = new HashMap<>();
-
-            //We use the HashMap with the Key being the Category.
-            //The 2nd part is the List
-            //Inside the List(That's inside each cat) we put items, with properties
-            //Those props are the name and the amount?
-
-            public static void groceryMenu() {
-//    ArrayList<GroceryList.GroItem> catList = new ArrayList(); // Maybe lets try it the other way first.
-//    HashMap<String, Double> gList = new HashMap<>();
-                System.out.println("Would you like to make a grocery list?");
-                //Using my input It ask a yes or no and returns a boolean
-                boolean answer = input.yesNo();
-                //We convert the keys to an array for many uses.
-                String[] keyArray = catList.keySet().toArray(new String[0]);
-                //We see if I wanted to enter a grocery list.
-                if (answer) {
-                    //I print out the categories.
-                    System.out.println("Here are the Categories:");
-                    for (String key : keyArray) {
-                        System.out.printf("|%s|\t", key);
-                    }
-                    groceryMenu2();
-
-                } else {
-                    //This happens if the if is false.
-                    System.out.println("Sorry bye.");
-                    //This exits the program. while we're inside of a void element.
-                    System.exit(0);
-                }
-            }
-
-            //We're cutting this part of the app in half so we can repeat it if the user puts an invalid answer in.
-            public static void groceryMenu2() {
-
-                System.out.println("\nPlease enter a valid category.");
-                //using get string to get what the user has chosen.
-                String choice = input.getString();
-                //This is where we are storing the haskKey/Cat for editing the list.
-                String hashKey = "";
-                //to see if th user gives us a valid option
-                boolean valid = false;
-                //Just making a keyArray again.
-                String[] keyArray = catList.keySet().toArray(new String[0]);
-                //Checking the user's input.
-                for (String key : keyArray) {
-                    if (choice.equalsIgnoreCase(key)) {
-                        valid = true;
-                        hashKey = key;
-                    }
-                }
-                //If it's valid we go through with making the list
-                if (valid) {
-                    System.out.printf("What grocery are you adding to %s?\n", hashKey);
-                    String grocery = input.getString();
-                    System.out.printf("How many \"%s\" are you getting?\n", grocery);
-                    int amount = input.getInt();
-                    GroItem item = new GroItem(grocery, amount);
-                    catList.get(hashKey).add(item);
-                } else {
-                    //If it's invalid we display the cats again, and tell them to enter another one and rerun part2 of the app.
-                    System.out.println("Sorry that's not a category.");
-                    System.out.println("Here are the Categories:");
-                    for (String key : keyArray) {
-                        System.out.printf("|%s|  ", key);
-                    }
-                    groceryMenu2();
-                }
-                //We are seeing if the user would like to continue
-                System.out.println("Would you like to continue adding items?");
-                boolean cont = input.yesNo();
-                //If yes then we display the cats again, and run Grocery Menu2
-                if(cont){
-                    System.out.println("Here are the Categories:");
-                    for (String key : keyArray) {
-                        System.out.printf("|%s|  ", key);
-                    }
-                    groceryMenu2();
-                    //If no we show them the final list with all the cats and the items they picked.
-                } else {
-                    System.out.println("Below is your list by category.");
-                    //Were using our keyArray to access the HashMap of categories
-                    for (String key : keyArray) {
-                        //We are printing out each category, with it's list
-                        System.out.printf("%s Products: ", key);
-                        //Were accessing each GroceryList.GroItem inside of each ArrayList inside of the each HashMap...
-                        for (GroItem list  : catList.get(key)){
-                            System.out.printf("|%d %s|",list.getAmount(),list.getName());
-
-                        }
-                        //Now that were are going back into the next category we clear the line?
-                        System.out.println(" ");
-                    }
-                }
-
-            }
-
-            public static void main(String[] args) {
-                //We are just adding category list
-                //The key is the category, and the 2nd part takes in an ArrayList, so I don't have to redefine it every time we add or take away from it.
-                //Each list will have a GroceryList.GroItem object.
-                catList.put("Dairy", new ArrayList<>());
-                catList.put("Meat", new ArrayList<>());
-                catList.put("Drink", new ArrayList<>());
-                catList.put("Other", new ArrayList<>());
+public class GroceryApp {
 
 
-                groceryMenu();
-
-
+    public static void addToShoppingList(HashMap<String, ArrayList<Item>> list, Input in) {
+        System.out.println("Please select department: ");
+        int num = 1;
+        for (String department : list.keySet()) {
+            System.out.printf("%d: %s%n", num, department);
+            num++;
+        }
+        String selectedDepartment = "";
+        while (!list.containsKey(selectedDepartment))
+        selectedDepartment = in.getString("Please enter the name of the item's department:");
+        if (!list.containsKey(selectedDepartment)) {
+                System.out.println("Input invalid.\nPlease try again.");
+        }
+        String itemName = in.getString("Please enter the name of the item: ");
+        int itemQuantity = in.getInt("Please enter the item quantity:");
+        float itemPrice = (float) in.getDouble("Please enter item price");
+        in.getString();
+        System.out.printf("Please review the following item:%nItem Name: %s%nItem Department: %s%nItem Quantity: %d%nItem Price: $%.2f%nWould you like to add this item to your grocery list?",itemName, selectedDepartment, itemQuantity, itemPrice);
+        if (in.yesNo()) {
+            System.out.println("Item has been saved to list.");
+            list.get(selectedDepartment).add(new Item(itemName, itemQuantity, itemPrice));
+        }else {
+            System.out.println("Item discarded.\nAdd new item?");
+            if (in.yesNo()) {
+                addToShoppingList(list,in);
             }
         }
+    }
+
+
+    public static void printList(HashMap<String, ArrayList<Item>> list) {
+        System.out.println("Here is your current list of items: ");
+        int categoriesGathered = 0;
+        for (Map.Entry<String, ArrayList<Item>> pair : list.entrySet()) {
+            if (!pair.getValue().isEmpty()) {
+                categoriesGathered++;
+                System.out.printf("%s:\n", pair.getKey());
+                for (Item item : pair.getValue()) {
+                    if (item.getQuantity() > 1) {
+                        System.out.printf("    %s,%d,$%.2f each, $%.2f total%n", item.getName(), item.getQuantity(), item.getPrice(), (item.getQuantity() * item.getPrice()));
+                    }else {
+                        System.out.printf("    %s,$%.2f%n", item.getName(), item.getPrice());
+                    }
+                }
+                System.out.println();
+            }
+        }
+        if (categoriesGathered == 0) {
+            System.out.println("\nList is currently empty.\nPlease add items to your grocery list.\n");
+        }
+    }
+
+
+    public static void runApp(HashMap<String, ArrayList<Item>> list, Input in) {
+        System.out.println("Welcome to the grocery store app!\n-----\n");
+        boolean run = true;
+        while (run) {
+            System.out.println("Please make your selection:");
+            System.out.println("1. Add new item to list");
+            System.out.println("2. View list");
+            System.out.println("3. Quit");
+            int userResponse = in.getInt("Please enter either 1, 2, or 3 into your terminal",1 ,3);
+            in.getString();
+            switch (userResponse) {
+                case 1:
+                    addToShoppingList(list, in);
+                    System.out.println("Returning to menu...\n");
+                    break;
+                case 2:
+                    printList(list);
+                    System.out.println("Returning to menu...\n");
+                    break;
+                default:
+                    System.out.println("Are you sure you want to quit?");
+                    if (in.yesNo()) {
+                        System.out.println("Thank you for choosing us!\nSee you soon!");
+                        run = false;
+                    }else {
+                        System.out.println("Returning to menu...\n");
+                    }
+            }
+        }
+    }
+
+
+    public static void main(String[] args) {
+//        Building the grocery list and menu categories.
+        HashMap<String, ArrayList<Item>> list = new HashMap<>();
+        list.put("Produce", new ArrayList<>());
+        list.put("Bakery", new ArrayList<>());
+        list.put("Meat", new ArrayList<>());
+        list.put("Seafood", new ArrayList<>());
+        list.put("Beer and Wine", new ArrayList<>());
+        list.put("dry goods", new ArrayList<>());
+        list.put("Frozen goods", new ArrayList<>());
+        list.put("Dairy", new ArrayList<>());
+
+        runApp(list, new Input());
+    }
+}
